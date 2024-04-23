@@ -5,9 +5,22 @@
 :root {
   --background: rgb(1, 16, 30);
   --text: rgb(255, 255, 255, 0.85);
+  --text-placeholder: rgb(255, 255, 255, 0.4);
   --primary-color: #e50914;
+  --default-button-background: #e50914ce;
   --popover-background: rgb(4, 27, 47);
+  --input-background: rgb(13, 57, 95);
+  --pagination-background: rgb(13, 57, 95);
   --yellow-star: #fcd80b;
+  --backdrop-gradient: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(255, 255, 255, 0.2946428571428571) 48%
+  );
+}
+
+.custom-video-gradient {
+  background: var(--backdrop-gradient);
 }
 
 body {

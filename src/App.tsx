@@ -12,6 +12,7 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import MyConfigProvider from "./components/MyConfigProvider";
+import SearchPage from "./pages/SearchPage";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,16 @@ export default function App() {
         <>
           <Header />
           <Liked />
+          <Footer />
+        </>
+      ),
+    },
+    {
+      path: "/search",
+      element: (
+        <>
+          <Header />
+          <SearchPage />
           <Footer />
         </>
       ),

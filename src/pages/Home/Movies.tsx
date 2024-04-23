@@ -15,7 +15,6 @@ export default function PopularMovies({
     queryFn: () => fetchMovies(page, movieType),
     staleTime: Infinity,
   });
-  let movies: IMovie = data;
   if (isLoading) {
     return (
       <div className="flex h-full justify-center items-center">
@@ -23,10 +22,14 @@ export default function PopularMovies({
       </div>
     );
   }
+  if (!data) {
+    return;
+  }
+  let movies: IMovie = data;
   return (
     <ul className="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
       {movies?.results.map((movie) => (
-        <MovieCard {...movie} />
+        <MovieCard key={movie.id} {...movie} />
       ))}
     </ul>
   );

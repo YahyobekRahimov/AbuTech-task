@@ -8,8 +8,6 @@ import { useLikedStore } from "../../hooks/zustand/useLikedStore";
 export default function PopoverContent(props: IMovieResult) {
   const likedMovies = useLikedStore((state) => state.likedMovies);
   const isLiked = likedMovies.some((movie) => movie.id === props.id);
-  console.log(likedMovies);
-
   const addLikedMovie = useLikedStore((state) => state.addLikedMovie);
   const removeLikedMovie = useLikedStore(
     (state) => state.removeMovie

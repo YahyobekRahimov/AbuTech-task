@@ -10,11 +10,7 @@ export default {
       xl: "1280px",
       "2xl": "1536px",
     },
-    extend: {
-      backgroundImage: {
-        "card-gradient": "var(--card-gradient)",
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

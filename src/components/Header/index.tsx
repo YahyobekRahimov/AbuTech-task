@@ -1,5 +1,6 @@
 import Container from "../Container";
 import { Link, useLocation } from "react-router-dom";
+import SearchInput from "./SearchInput";
 
 interface INav {
   path: string;
@@ -45,6 +46,7 @@ export default function Header() {
             ))}
           </ul>
         </nav>
+        <SearchInput />
       </Container>
     </header>
   );

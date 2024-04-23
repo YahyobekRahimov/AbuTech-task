@@ -3,12 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --background: rgb(241, 245, 249);
-  --text: black;
+  --background: rgb(1, 16, 30);
+  --text: rgb(255, 255, 255, 0.85);
   --primary-color: #e50914;
+  --popover-background: rgb(4, 27, 47);
+  --yellow-star: #fcd80b;
 }
 
 body {
   background: var(--background);
   color: var(--text);
+}
+
+.image-mask {
+  transition: all 0.2s ease;
+}
+
+.card-hover-effect:hover .image-mask {
+  background: rgba(241, 245, 249, 0.15);
+}
+.card-hover-effect:hover h3 {
+  color: var(--primary-color);
+}
+.card-hover-effect h3 {
+  transition: all 0.2s ease;
 }

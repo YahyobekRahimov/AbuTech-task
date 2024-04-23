@@ -11,6 +11,12 @@ export default function MyConfigProvider({
       theme={{
         token: {
           colorPrimary: "#E50914",
+          colorText: "var(--text)",
+        },
+        components: {
+          Popover: {
+            colorBgElevated: "var(--popover-background)",
+          },
         },
       }}
       children={children}

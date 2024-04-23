@@ -1,3 +1,5 @@
+import { IGenreRoot } from "../types/ApiDataTypes";
+
 export type MovieTypes =
   | "popular"
   | "top_rated"
@@ -26,6 +28,31 @@ export const fetchMovies = async (
     const data = await response.json();
     console.log("fetched data once");
     return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const fetchGenres = async () => {
+  const url =
+    "https://api.themoviedb.org/3/genre/movie/list?language=en";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization:
+        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzM2MwYWZlMTYyNjAwNWM5MzAzNDMyMzVjNTYzYWQ2MiIsInN1YiI6IjY1NjA2NGVmMmIxMTNkMDEwY2MwYjU2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U_sA7zS9sks9WxpONrqC-vdjwqgn8Z7qc2TayDs7Vmg",
+    },
+  };
+  try {
+    const res = await fetch(url, options);
+    if (!res.ok) {
+      throw Error("Failed to retrieve genres");
+    }
+    const data: IGenreRoot = await res.json();
+    console.log("Fetched genres");
+    return data.genres;
   } catch (error) {
     console.error(error);
     throw error;

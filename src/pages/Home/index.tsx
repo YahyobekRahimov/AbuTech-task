@@ -1,8 +1,21 @@
 import { Tabs, TabsProps } from "antd";
 import Container from "../../components/Container";
 import Movies from "./Movies";
+import { useQuery } from "@tanstack/react-query";
+import { fetchGenres } from "../../lib/apiService";
+import { useLikedStore } from "../../hooks/zustand/useLikedStore";
 
 export default function Home() {
+  const { data: genres } = useQuery({
+    queryKey: ["genres"],
+    queryFn: fetchGenres,
+    staleTime: Infinity,
+  });
+
+  const addGenres = useLikedStore((state) => state.addGenres);
+  if (genres) {
+    addGenres(genres);
+  }
   const items: TabsProps["items"] = [
     {
       key: "1",
@@ -25,6 +38,7 @@ export default function Home() {
       children: <Movies movieType="now_playing" />,
     },
   ];
+
   return (
     <main>
       <Container>

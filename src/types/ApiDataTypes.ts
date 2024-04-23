@@ -1,9 +1,18 @@
 export interface IMovie {
   dates: Dates;
   page: number;
-  results: Result[];
+  results: IMovieResult[];
   total_pages: number;
   total_results: number;
+}
+
+export interface IGenreRoot {
+  genres: IGenre[];
+}
+
+export interface IGenre {
+  id: number;
+  name: string;
 }
 
 export interface Dates {
@@ -11,7 +20,7 @@ export interface Dates {
   minimum: string;
 }
 
-export interface Result {
+export interface IMovieResult {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

@@ -3,14 +3,10 @@ import Container from "../../components/Container";
 import { useQuery } from "@tanstack/react-query";
 import { fetchMovieDetails } from "../../lib/apiService";
 import { Spin } from "antd";
-import { FaCirclePlay } from "react-icons/fa6";
-import { useState } from "react";
 import { BsStarFill } from "react-icons/bs";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useLikedStore } from "../../hooks/zustand/useLikedStore";
 import { IMovieResult } from "../../types/ApiDataTypes";
-import { motion } from "framer-motion";
-import WatchMovie from "./WatchMovie";
 
 export default function Details() {
   // Getting the movie ID

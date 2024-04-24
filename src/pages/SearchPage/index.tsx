@@ -1,29 +1,44 @@
 import Container from "../../components/Container";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { searchMovies } from "../../lib/apiService";
 import { Pagination, Spin } from "antd";
 import { ISearchResultRoot } from "../../types/ApiDataTypes";
 import MovieCard from "../../components/MovieCard";
+import { useSearchStore } from "../../hooks/zustand/useSearchStore";
 
 export default function SearchPage() {
-  const url = new URL(window.location.href);
-  const searchParams = url.searchParams;
-  const query = searchParams.get("query");
-  const include_adult = searchParams.get("include_adult");
-  const language = searchParams.get("language");
-  const page = searchParams.get("page");
-
-  const queryClient = useQueryClient();
+  const query = useSearchStore((state) => state.query);
+  const page = useSearchStore((state) => state.page);
+  const language = useSearchStore((state) => state.language);
+  const include_adult = useSearchStore(
+    (state) => state.include_adult
+  );
+  const setPage = useSearchStore((state) => state.setPage);
 
   const { data, isLoading } = useQuery({
     queryKey: [
       "movie search",
       { query, include_adult, language, page },
     ],
-    queryFn: () => searchMovies(query || "", false, "en-US"),
+    queryFn: query
+      ? () => searchMovies(query, false, "en-US", page)
+      : () =>
+          Promise.resolve({
+            page: 1,
+            results: [],
+            total_pages: 1,
+            total_results: 0,
+          }),
     staleTime: Infinity,
   });
 
+  if (!query.length) {
+    return (
+      <h1 className="text-3xl">
+        Please, write something in the text field to search for movies
+      </h1>
+    );
+  }
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -37,7 +52,9 @@ export default function SearchPage() {
   }
 
   const movies: ISearchResultRoot = data;
-
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
   return (
     <main>
       <Container className="mt-10">
@@ -48,10 +65,11 @@ export default function SearchPage() {
         </ul>
         <div className="my-10 mb-20">
           <Pagination
-            defaultCurrent={1}
             total={movies.total_results}
-            pageSize={10}
-            pageSizeOptions={[10]}
+            pageSize={movies.results.length}
+            pageSizeOptions={[20]}
+            current={page}
+            onChange={handlePageChange}
           />
         </div>
       </Container>

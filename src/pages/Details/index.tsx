@@ -73,10 +73,6 @@ export default function Details() {
 
   return (
     <main>
-      <WatchMovie
-        backdrop_path={movie.backdrop_path}
-        title={movie.title}
-      />
       <Container>
         <div className="mt-10">
           <div>
@@ -88,8 +84,8 @@ export default function Details() {
               />
               <div className="w-full flex flex-col">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-3xl font-bold">
-                    {movie?.title}
+                  <h2 className="text-3xl font-bold text-wrap w-[300px]">
+                    {movie.title}
                   </h2>
                   <div onClick={handleLiked}>
                     {isLiked ? (
@@ -128,7 +124,7 @@ export default function Details() {
                     <span className="opacity-65">Popularity:</span>{" "}
                     {movie?.popularity}
                   </div>
-                  <div className="grid grid-cols-[120px_100px] xs:grid-cols-[180px_1fr]">
+                  <div className="grid grid-cols-[120px_100px] xs:grid-cols-[180px_1fr] w-[350px]">
                     <span className="opacity-65">Genre:</span>{" "}
                     {movie?.genres
                       .map((genre) => genre.name)
@@ -140,7 +136,7 @@ export default function Details() {
                     </span>{" "}
                     {movie?.origin_country}
                   </div>
-                  <div className="grid grid-cols-[120px_100px] xs:grid-cols-[180px_1fr]">
+                  <div className="grid grid-cols-[120px_100px] w-[350px] xs:grid-cols-[180px_1fr]">
                     <span className="opacity-65">
                       Production companies:
                     </span>{" "}

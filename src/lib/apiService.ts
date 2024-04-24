@@ -113,7 +113,7 @@ export const searchMovies = async (
     }
 
     const data: ISearchResultRoot = await res.json();
-
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
